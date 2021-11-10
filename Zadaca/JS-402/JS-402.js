@@ -59,6 +59,6 @@ let lista = [
  upisan: true
 }]
 
-console.log(provjeri(lista, "Taylah", true));
-console.log(provjeri(lista, "Holloway", true));
-console.log(provjeri(lista, "Needham", true));
+console.log(provjeri(lista, "good", true));
+console.log(provjeri(lista, "hollow", false));
+console.log(provjeri(lista, "nEEDh", true));

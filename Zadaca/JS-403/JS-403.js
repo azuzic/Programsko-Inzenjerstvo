@@ -1,11 +1,24 @@
-function ackermann(m, n) {
-	if (m==0) return n+1;
-	if (m>0 && n==0) return ackermann(m-1,1);
-	if (m>0 && n>0) return ackermann(m-1,ackermann(m,n-1));
-}
-
-// napisati funkciju ackermann
-console.log(ackermann(0, 5)) // → 6
-console.log(ackermann(5, 0)) // → 65533
-console.log(ackermann(3, 6)) // → 509
-console.log(ackermann(3, 3)) // → 61
+let zagrade = function(s) {
+	let S = ""
+	for (let i=0; i<s.length; i++) {
+		if (s[i]=='[' ||
+		    s[i]=='{' ||
+		    s[i]=='(') 
+			S = S + s[i];
+		if (s[i]==']' ||
+		    s[i]=='}' ||
+		    s[i]==')') 
+			if ((S[S.length-1]== '[' && s[i]==']') ||
+			    (S[S.length-1]== '{' && s[i]=='}') ||
+			    (S[S.length-1]== '(' && s[i]==')')
+				)
+				S = S.substr(0, S.length-1);
+			else 
+				return false
+	}
+	if (S == "") return true;
+	else return false;
+};
+console.log(zagrade("[()]()()")); // → true
+console.log(zagrade("{[((()))]}")); // → true
+console.log(zagrade("({)}")); // → false
