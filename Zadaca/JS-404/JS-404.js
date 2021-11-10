@@ -1,11 +1,60 @@
-function ackermann(m, n) {
-	if (m==0) return n+1;
-	if (m>0 && n==0) return ackermann(m-1,1);
-	if (m>0 && n>0) return ackermann(m-1,ackermann(m,n-1));
+let studenti = [
+ {
+ ime: "Marko",
+ prezime: "Marković",
+ grad: "Pula"
+ },
+ {
+ ime: "Iva",
+ prezime: "Ivić",
+ grad: "Našice"
+ },
+ {
+ ime: "Lucija",
+ prezime: "Lucić",
+ grad: "Zagreb"
+ },
+ {
+ ime: "Nikola",
+ prezime: "Nikolić",
+ grad: "Rijeka"
+ }
+];
+function napredna_pretraga(lista, pojam) {
+	let cs = [];
+	while(pojam.length != 0) {
+		let c = "";
+		do {
+			c += pojam[0];
+			pojam = pojam.substr(1);
+			if (pojam.length == 0)
+				break;
+		} while (pojam[0] != " ");
+		pojam = pojam.substr(1);
+		cs.push(c);
+	}
+	console.log(cs);
+	for (let i=0; i<lista.length; i++) {
+		f = true;
+		for (let j=0; j<cs.length; j++) {
+			if ((lista[i].ime.toLowerCase().indexOf(cs[j].toLowerCase()) !== -1 || 
+				 lista[i].prezime.toLowerCase().indexOf(cs[j].toLowerCase()) !== -1) || 
+				 lista[i].grad.toLowerCase().indexOf(cs[j].toLowerCase()) !== -1) {
+				continue;
+			}
+			else {
+				f = false;
+				break;
+			}
+		}
+		if (f) {
+			console.log(i);
+			return i;
+		}
+	}
+	return -1;
 }
-
-// napisati funkciju ackermann
-console.log(ackermann(0, 5)) // → 6
-console.log(ackermann(5, 0)) // → 65533
-console.log(ackermann(3, 6)) // → 509
-console.log(ackermann(3, 3)) // → 61
+console.assert(napredna_pretraga(studenti, "ma ić") == 0) // → prvi student
+console.assert(napredna_pretraga(studenti, "ko lić ri") == 3) // → zadnji student
+console.assert(napredna_pretraga(studenti, "ić za") == 2) // → treći student
+console.assert(napredna_pretraga(studenti, "ić ko la ri") == 3) // → zadnji student
